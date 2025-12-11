@@ -1,0 +1,74 @@
+
+1) Registro
+usuario:string, contrseña:string, idDepartamento:int, 
+idCiudad:int
+
+V)Al seleccionar un departamento se desplegarán las ciudades correspondientes al departamento seleccionado
+
+
+2)Login
+usuario:string, password:string
+
+3)Logout
+
+4)Agregar un Evento
+idCategoria:int, idUsuario:int, detalle:string, fecha:string 
+La fecha podrá ser cualquiera hasta la fecha actual, no puede ser posterior.
+En caso de no aportar este dato a la API, se tomará la fecha y hora actual,
+en caso de que se brinde, debe estar con formato AAAA-MM-DD HH:MM:SS.
+Detalles es un campo opcional
+
+5)Listado de Eventos
+v)cada evento le corresponde una imagen: a eso se debe concatenar el nombre de la imagen obtenida del servicio de categorías y la extensión .png
+V)eventos registrados por tu usuario
+V)costado de cada evento se deberá disponer un botón para eliminar los datos de ese evento. Este listado se dividirá en dos partes: 
+V)Listado del día:Se listarán los eventos correspondientes a la fecha de hoy 
+V)Listado de días anteriores: Se listarán todos los eventos correspondientes a días anteriores. 
+
+7)Mapa
+Mostrar en un mapa la ubicación del usuario y marcar además todas las plazas 
+que existan indicando para cada una si es accesible y si permiten mascotas.
+
+
+6)Informe de eventos
+A) Biberones: en una pantalla, se deberá mostrar el total de biberones 
+ingeridos en el día y el tiempo transcurrido desde el último biberón.
+B) Pañales: se deberá mostrar el total de pañales cambiados en el día y el 
+tiempo transcurrido desde el último cambio. 
+Para el informe de eventos, se toma como hora actual el momento en que se 
+carga la pantalla. Se muestra con formato HH:MM
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+Semana del 29/7 al 4/8 
+    Registro 
+    Login 
+    AutoLogin
+    Logout 
+    Agregar un evento
+
+
+Semana del 5/8 al 11/8
+    Listado de eventos del dia 
+    Listado de eventos dias anteriores 
+    Eliminar un evento 
+    Informe de eventos 
+    Mapa 
+
+
+Semana del 12/8 al 13/8
+    Generacion de APK 
+    Testing 

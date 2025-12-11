@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  crossorigin="" ></script>
+    <script src="capacitor.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <ion-app>
+        <ion-router id="ruteo">
+            <ion-route url="/" component="pantalla-home"></ion-route>
+            <ion-route url="/login" component="pantalla-login"></ion-route>
+            <ion-route url="/registro" component="pantalla-registro"></ion-route>
+            <ion-route url="/eventos" component="pantalla-eventos"></ion-route>
+            <ion-route url="/historial" component="pantalla-historial"></ion-route>
+            <ion-route url="/agregarEvento" component="pantalla-aEvento"></ion-route>
+            <ion-route url="/informe" component="pantalla-informe"></ion-route>
+            <ion-route url="/logout" component="pantalla-home"></ion-route>
+          </ion-router>
+          <ion-nav></ion-nav>
+
+          <!-- MENU -->
+          <ion-menu side="start" menu-id="first" content-id="main" id="menu" >
+            <ion-header>
+                <ion-toolbar color="dark">
+                    <ion-title>Menu</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <ion-list color="dark" id="menuOpciones">
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+        <div id="main"></div>
+
+        <!-- HOME -->
+        <page-home class="ion-page" id="pantalla-home">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-buttons color="dark" slot="start">
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                    <ion-icon name="map-outline"  slot="start"></ion-icon>
+                    <ion-title>Home</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <div id="map"></div>
+                <style>
+                    #map {
+                    height: 100%;
+                    }
+                </style>
+            </ion-content>
+        </page-home>
+
+      <!-- LOGIN -->
+      <page-login class="ion-page" id="pantalla-login">
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+             
+                <ion-title>Login</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-item>
+                    <ion-input label="Usuario" id="txtLEmail" labelPlacement="stacked"
+                        placeholder="Ingrese usuario..."></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input label="Contraseña" id="txtLPassword" type="password" labelPlacement="stacked"
+                        placeholder="Ingrese contraseña..."></ion-input>
+                </ion-item>
+                <ion-button expand="full" color="dark" id="btnLogin">Login</ion-button>
+            </ion-list>
+        </ion-content>
+    </page-login>
+
+       <!-- REGISTRO -->
+       <page-registro class="ion-page" id="pantalla-registro">
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+                <ion-title>Registrar</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-item>
+                    <ion-input label="Usuario" id="txtREmail" labelPlacement="stacked"
+                        placeholder="Ingresar usuario..."></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input label="Password" id="txtRPassword" type="password" labelPlacement="stacked"
+                        placeholder="Ingresar contraseña..."></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-select id="slcDepartamento" label="Departamento" placeholder="Seleccione su Departamento">
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-select id="slcCiudad" label="Ciudad" placeholder="Seleccione su ciudad">
+                    </ion-select>
+                </ion-item>    
+            <ion-button expand="full" color="dark" id="btnRegistrar">Registrar</ion-button>
+            </ion-list>
+            <div id="regRes"></div>
+        </ion-content>
+    </page-registro>
+
+
+      <!-- EVENTOS -->
+      <page-eventos class="ion-page" id="pantalla-eventos">
+        <ion-header>
+        
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+                <ion-icon name="list-circle" slot="start"></ion-icon>
+                <ion-title>Eventos</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-button slot="middle" color="warning" onclick="ListarHistorial()">
+            <ion-icon name="book"></ion-icon>- Ver historial -<ion-icon name="book"></ion-icon> 
+        </ion-button>
+
+        <ion-card-content>
+            <ion-list id="lista-eventos"></ion-list>
+        </ion-card-content>
+        
+    </page-eventos>
+
+        <!-- HISTORIAL -->
+        <page-historial class="ion-page" id="pantalla-historial">
+        <ion-header>
+       
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                </ion-buttons>
+                <ion-icon name="book" slot="start"></ion-icon>
+                <ion-title>Historial</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-button slot="middle" color="warning" onclick="ListarEventos()">
+            <ion-icon name="list-circle"></ion-icon></ion-icon>- Ver Eventos de Hoy -<ion-icon name="list-circle"></ion-icon></ion-icon>
+        </ion-button>
+        <ion-card-content>
+            <ion-list id="lista-historial"></ion-list>
+        </ion-card-content>
+    </page-historial>
+
+<!-- AGREGAR EVENTO -->
+<page-aEvento class="ion-page" id="pantalla-aEvento">
+    <ion-header>
+           <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-title>Agregar Evento</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-item>
+                <ion-select id="slcCategorias" label="Categoria" placeholder="Seleccione la categoria">
+                </ion-select>
+            </ion-item>  
+            <ion-item>
+                <ion-input label="Detalle" id="txtDetalle" labelPlacement="stacked"
+                    placeholder="Ingresar Detalle..."></ion-input>
+            </ion-item>
+            <ion-item>
+          
+                <ion-datetime presentation="date" id="eventoFecha"  first-day-of-week="1" displayFormat="YYYY-MM-DD"></ion-datetime>
+
+            </ion-item>
+        <ion-button expand="full" id="btnaEvento">Agregar</ion-button>
+        </ion-list>
+        <div id="aEventoRes"></div>
+    </ion-content>
+</page-aEvento>
+    
+            <!-- INFORME -->
+<page-informe class="ion-page" id="pantalla-informe">
+    <ion-header>
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-icon name="happy-outline" slot="start"></ion-icon>
+            <ion-title>Informe</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <div id="divInforme"></div>
+
+    </ion-content>
+</page-informe>
+
+
+
+    </ion-app>
+    <script src="js/codigo.js" defer></script>
+  </body>
+</html>
