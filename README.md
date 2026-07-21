@@ -50,8 +50,3 @@ npx cap sync
 npx cap open android   # opens Android Studio to build/run
 ```
 
-## Known limitations
-
-- No `package.json` — dependencies (Capacitor, etc.) aren't currently declared anywhere in the repo; anyone building the Android version has to install them manually per the steps above
-- No automated tests
-- API base URL is hardcoded in `js/codigo.js` rather than configurable per environment
