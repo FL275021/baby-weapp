@@ -1,0 +1,11 @@
+# Build output / packaged app
+www/app-debug.apk
+*.apk
+*.ipa
+
+# Dependencies (if a package manager is introduced later)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
